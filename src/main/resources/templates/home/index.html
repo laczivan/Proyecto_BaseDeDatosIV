@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/base :: layout(${titulo}, ~{::section})}">
+<body>
+    <section>
+        <div class="p-5 mb-4 bg-body-tertiary rounded-3 border">
+            <div class="container-fluid py-3">
+                <h1 class="display-6 fw-bold">Bienvenido al Sistema de Gestión</h1>
+                <p class="col-md-8 fs-5 text-muted">
+                    Arquitectura base configurada con Java 25, Spring Boot, Thymeleaf y Bootstrap 5. 
+                    Lista para conectarse a la base de datos <strong>proyectodbiv</strong> en MongoDB.
+                </p>
+                <a class="btn btn-primary btn-lg" th:href="@{/productos}" role="button">
+                    Ver Catálogo de Productos
+                </a>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
