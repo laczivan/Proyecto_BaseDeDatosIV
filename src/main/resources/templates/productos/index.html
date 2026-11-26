@@ -21,10 +21,20 @@
         <h1>Catálogo de productos</h1>
     </section>
 
-    <!-- Sección 3: Tabla de productos -->
+    <!-- Sección 3: Botón nuevoProducto y Tabla de productos -->
     <section>
+        <div class="mb-3">
+            <button type="button"
+                    name="nuevoProducto"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#nuevoProducto">
+                Nuevo Producto
+            </button>
+        </div>
+
         <div class="table-responsive">
-            <table id="productos" class="table table-striped table-bordered">
+            <table id="productos" class="table table-striped table-bordered align-middle">
                 <thead>
                     <tr>
                         <th>id</th>
@@ -32,6 +42,7 @@
                         <th>precio</th>
                         <th>categoria</th>
                         <th>stock</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -41,11 +52,74 @@
                         <td th:text="${producto.precio}"></td>
                         <td th:text="${producto.categoria}"></td>
                         <td th:text="${producto.stock}"></td>
+                        <td>
+                            <a th:href="@{/productos/ver/{id}(id=${producto.id})}"
+   class="btn btn-info btn-sm text-white p-0 d-inline-flex align-items-center justify-content-center"
+   style="width: 24px; height: 24px;"
+   title="Ver"
+   aria-label="ver">
+    <i class="fa-solid fa-eye fa-xs"></i>
+</a>
+                            <button type="button"
+                                    class="btn btn-warning btn-sm text-white p-0 d-inline-flex align-items-center justify-content-center"
+                                    style="width: 24px; height: 24px;"
+                                    title="Modificar"
+                                    aria-label="modificar">
+                                <i class="fa-solid fa-pen-to-square fa-xs"></i>
+                            </button>
+                            <button type="button"
+                                    class="btn btn-danger btn-sm p-0 d-inline-flex align-items-center justify-content-center"
+                                    style="width: 24px; height: 24px;"
+                                    title="Eliminar"
+                                    aria-label="eliminar">
+                                <i class="fa-solid fa-trash fa-xs"></i>
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </section>
+
+    <!-- Ventana Modal: nuevoProducto -->
+    <div class="modal fade" id="nuevoProducto" tabindex="-1" aria-labelledby="nuevoProductoLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form th:action="@{/productos/nuevoProducto}" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="nuevoProductoLabel">Nuevo Producto</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="id" class="form-label">ID</label>
+                            <input type="text" class="form-control" id="id" name="id" placeholder="Opcional (se autogenera si se deja vacío)">
+                        </div>
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="precio" class="form-label">Precio</label>
+                            <input type="number" step="0.01" class="form-control" id="precio" name="precio" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="categoria" class="form-label">Categoría</label>
+                            <input type="text" class="form-control" id="categoria" name="categoria" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="stock" class="form-label">Stock</label>
+                            <input type="number" class="form-control" id="stock" name="stock" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </main>
 </body>
 </html>
